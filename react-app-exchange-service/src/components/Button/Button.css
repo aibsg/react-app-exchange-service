@@ -1,0 +1,18 @@
+.my-button{
+    border: none;    
+    background-color: #2b2b2b;
+    color: white;
+    border-radius: 15px;
+    padding: 18px 20px;        
+    margin: 0;
+    margin-left: 40px;         
+    font: inherit;      
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+
+
+  
