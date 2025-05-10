@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./artifact-exchange-api/Artifact_Service_Api
+    ports:
+      - "1113:8080"  # Изменено на 80 для стандартного HTTP
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    build: ./react-app-exchange-service
+    ports:
+      - "1114:80"
+    depends_on:
+      - api
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "1233:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
