@@ -22,9 +22,13 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.LOGIN }}@${{ secrets.HOST }} << 'EOF'
-            cd /opt/react-app-exchange-service
-            git pull
-            docker-compose down
-            docker-compose up -d --build
-          EOF
+            ssh ${{ secrets.LOGIN }}@${{ secrets.HOST }} << 'EOF'
+                set -e
+                cd /opt/react-app-exchange-service
+                git pull
+                cat <<EOT > artifact-exchange-api/Artifact_Service_Api/appsettings.json
+            ${{ secrets.APPSETTINGS_JSON }}
+            EOT
+                docker-compose down
+                docker-compose up -d --build
+            EOF
