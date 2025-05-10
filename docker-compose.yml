@@ -4,12 +4,16 @@ services:
   api:
     build: ./artifact-exchange-api/Artifact_Service_Api
     ports:
-      - "1113:8080"  # Изменено на 80 для стандартного HTTP
+      - "1113:8080"  
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
+    command: >
+      sh -c "dotnet ef database update --verbose && 
+      dotnet RestaurantAPI.dll"
+
 
   app:
     build: ./react-app-exchange-service
