@@ -1,5 +1,6 @@
 import Note from "../../types/Note"
 import "./NoteCard.css"
+import tag from "../../../public/tag.svg"
 
 export default function NoteCard({ note }: { note: Note }) {
     return (
@@ -19,7 +20,7 @@ export default function NoteCard({ note }: { note: Note }) {
                     {note.userName}
                 </p>
                 <div className = "tag-container">
-                    <img src="../../../public/tag.svg" className="tag-image" />
+                    <img src={tag} className="tag-image" />
                     <p className="tag-name">
                         {note.tag}
                     </p>
